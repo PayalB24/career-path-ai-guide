@@ -1,0 +1,27 @@
+:root {
+  --electric-blue: #007BFF;
+  --electric-blue-dark: #0056b3;
+  --dusty-gray: #F4F4F4;
+  --dusty-gray-dark: #B0B0B0;
+  --text-dark: #333;
+}
+
+body {
+  background-color: var(--dusty-gray);
+  color: var(--text-dark);
+}
+
+.btn-primary {
+  background-color: var(--electric-blue);
+  border-color: var(--electric-blue);
+}
+
+.btn-primary:hover {
+  background-color: var(--electric-blue-dark);
+  border-color: var(--electric-blue-dark);
+}
+
+.card {
+  border: 1px solid var(--dusty-gray-dark);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
