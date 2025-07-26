@@ -8,7 +8,7 @@ function Home() {
       {/* Hero Section */}
       <section className="text-center py-5 bg-white shadow">
         <h1 className="display-4 fw-bold text-gradient mb-3">
-          Career Path AI
+          MapMyFuture
         </h1>
         <p className="lead text-secondary mb-4">
           Discover Your Dream Career with AI Insights
