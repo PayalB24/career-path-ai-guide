@@ -5,6 +5,27 @@
   --dusty-gray-dark: #B0B0B0;
   --text-dark: #333;
 }
+html, body {
+  position: relative;
+  overflow-x: visible !important;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.app-layout {
+  position: relative;
+  z-index: 1;
+}
+.chatbot-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
 
 body {
   background-color: var(--dusty-gray);
