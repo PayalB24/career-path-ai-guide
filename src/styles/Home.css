@@ -1,6 +1,7 @@
+
 :root {
   --primary-dark: #304E86;
-  --primary-blue: #0D40A5; /* Updated button color */
+  --primary-blue: #0D40A5; 
   --accent-blue: #2699C2;
   --light-blue: #D9E7FB;
   --text-dark: #2c2c2c;
@@ -8,20 +9,20 @@
   --bg-light: #fefefe;
 }
 
-/* Body and Background */
+
 body {
   background-color: var(--light-blue);
   color: var(--text-dark);
 }
 
-/* Hero Section Gradient Title */
+
 .text-gradient {
   background: linear-gradient(to right, var(--primary-dark), var(--primary-blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Buttons */
+
 .btn-success {
   background-color: var(--primary-blue);
   border-color: var(--primary-blue);
@@ -43,7 +44,6 @@ body {
   color: #fff;
 }
 
-/* Card Styling */
 .card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: none;
@@ -65,7 +65,7 @@ body {
   color: var(--text-muted);
 }
 
-/* Footer */
+
 footer {
   background-color: var(--bg-light);
   color: var(--text-muted);

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Home.css'; // Create a separate CSS file for minor tweaks
+import '../styles/Home.css';
+import Chatbot from '../chatbot/Chatbot'; // ✅ Import the chatbot
 
 function Home() {
   return (
     <div className="d-flex flex-column min-vh-100 bg-light text-dark">
       {/* Hero Section */}
-      <section className="text-center py-5 bg-white shadow">
+      <section className="text-center py-5 bg-white shadow position-relative">
         <h1 className="display-4 fw-bold text-gradient mb-3">
           MapMyFuture
         </h1>
@@ -31,7 +32,9 @@ function Home() {
             <div className="col-md-4">
               <div className="card h-100 shadow-sm">
                 <div className="card-body">
-                  <h5 className="card-title">🧠 Personalized Assessments</h5>
+                  <h5 className="card-title" data-icon="🧠">
+                    Personalized Assessments
+                  </h5>
                   <p className="card-text text-secondary">
                     Quizzes based on your interests, strengths, and goals.
                   </p>
@@ -41,7 +44,9 @@ function Home() {
             <div className="col-md-4">
               <div className="card h-100 shadow-sm">
                 <div className="card-body">
-                  <h5 className="card-title">📊 AI Insights</h5>
+                  <h5 className="card-title" data-icon="📊">
+                    AI Insights
+                  </h5>
                   <p className="card-text text-secondary">
                     Recommendations powered by real-world career data.
                   </p>
@@ -51,7 +56,9 @@ function Home() {
             <div className="col-md-4">
               <div className="card h-100 shadow-sm">
                 <div className="card-body">
-                  <h5 className="card-title">🚀 Career Roadmaps</h5>
+                  <h5 className="card-title" data-icon="🚀">
+                    Career Roadmaps
+                  </h5>
                   <p className="card-text text-secondary">
                     Step-by-step journey to reach your dream profession.
                   </p>
@@ -61,6 +68,8 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <Chatbot /> {/* ✅ Chatbot added here */}
     </div>
   );
 }
