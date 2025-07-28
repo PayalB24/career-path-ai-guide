@@ -1,0 +1,20 @@
+/* src/styles/Dashboard.css */
+
+.bg-dashboard {
+  background-color: #D9E7FB;
+}
+
+.text-primary-custom {
+  color: #304E86;
+}
+
+.btn-primary-custom {
+  background-color: #0D40A5;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background-color: #092f78;
+}
