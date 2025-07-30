@@ -2,10 +2,15 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import json
 
+from routes.auth_routes import auth_bp  # 🔹 Import auth blueprint
+
 app = Flask(__name__)
 CORS(app)
 
-# Load questions
+# 🔹 Register the authentication blueprint
+app.register_blueprint(auth_bp)
+
+# 🔹 Load career questions
 with open('questions.json') as f:
     questions_data = json.load(f)
 
@@ -21,7 +26,6 @@ def submit_answers():
     if not answers:
         return jsonify({'error': 'No answers provided'}), 400
 
-    # Scoring
     scores = {'R': 0, 'I': 0, 'S': 0, 'A': 0, 'E': 0, 'C': 0}
     for answer in answers:
         category = answer.get('category')
@@ -29,7 +33,6 @@ def submit_answers():
         if category in scores:
             scores[category] += value
 
-    # Determine top score
     recommended = max(scores, key=scores.get)
 
     career_map = {
