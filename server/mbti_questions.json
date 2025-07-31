@@ -1,0 +1,12 @@
+[
+  { "id": 1, "question": "I gain energy by being around people." },
+  { "id": 2, "question": "I prefer to focus on facts rather than abstract ideas." },
+  { "id": 3, "question": "I often make decisions based on logic and objectivity." },
+  { "id": 4, "question": "I like to have things decided and organized." },
+  { "id": 5, "question": "I gain energy from spending time alone." },
+  { "id": 6, "question": "I enjoy brainstorming and imagining future possibilities." },
+  { "id": 7, "question": "I consider people’s feelings when making decisions." },
+  { "id": 8, "question": "I prefer to keep my options open rather than make a decision quickly." },
+  { "id": 9, "question": "I enjoy discussing big-picture ideas." },
+  { "id": 10, "question": "I like setting goals and following through with a plan." }
+]

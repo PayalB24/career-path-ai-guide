@@ -1,0 +1,12 @@
+[
+  { "id": 1, "question": "I enjoy working with tools, machines, or animals." },
+  { "id": 2, "question": "I like solving math or science problems." },
+  { "id": 3, "question": "I enjoy creating art, music, or writing." },
+  { "id": 4, "question": "I like helping people solve their problems." },
+  { "id": 5, "question": "I enjoy leading or convincing people to buy something or to participate in activities." },
+  { "id": 6, "question": "I enjoy working with data, numbers, or detailed tasks." },
+  { "id": 7, "question": "I prefer outdoor work over office work." },
+  { "id": 8, "question": "I enjoy conducting experiments or doing research." },
+  { "id": 9, "question": "I like performing on stage or expressing myself creatively." },
+  { "id": 10, "question": "I prefer organizing files, data, or information." }
+]
