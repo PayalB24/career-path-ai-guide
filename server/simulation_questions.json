@@ -1,0 +1,12 @@
+[
+  { "id": 1, "question": "You are asked to lead a team for a school event. What role do you take?" },
+  { "id": 2, "question": "You’re given a complex problem with no clear solution. How do you approach it?" },
+  { "id": 3, "question": "You have a free day. What would you most likely do?" },
+  { "id": 4, "question": "A friend needs help preparing for a competition. What’s your response?" },
+  { "id": 5, "question": "You need to analyze sales data and create a report. How do you feel?" },
+  { "id": 6, "question": "You're part of a group project. What role do you naturally take?" },
+  { "id": 7, "question": "You see a design flaw in a product. What do you do?" },
+  { "id": 8, "question": "You’re asked to present a new idea to a large audience. What’s your reaction?" },
+  { "id": 9, "question": "You receive feedback that your code is not optimized. What’s your first step?" },
+  { "id": 10, "question": "You are tasked with organizing a college fest. Which task excites you most?" }
+]
