@@ -1,4 +1,3 @@
-// Auth.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,9 +5,61 @@ function Auth() {
   const [activeTab, setActiveTab] = useState('login');
   const navigate = useNavigate();
 
+  // 🔐 Handle Login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    try {
+      const res = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      alert(data.message);
+
+      if (res.ok) {
+        navigate("/assessment/self-discovery");
+
+      }
+    } catch (err) {
+      alert("Login failed. Please try again.");
+      console.error(err);
+    }
+  };
+
+  // 📝 Handle Signup
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const name = document.getElementById("signupName").value;
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+
+    try {
+      const res = await fetch("http://localhost:5000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+      alert(data.message);
+
+      if (res.ok) {
+        setActiveTab("login");
+      }
+    } catch (err) {
+      alert("Signup failed. Please try again.");
+      console.error(err);
+    }
+  };
+
   return (
     <div className="position-relative container py-5" style={{ maxWidth: '500px' }}>
-      {/* Top-Right Dashboard Skip Button */}
+      {/* Skip Button */}
       <button
         className="btn btn-sm position-absolute top-0 end-0 m-3 text-white"
         style={{ backgroundColor: '#0D40A5' }}
@@ -39,34 +90,34 @@ function Auth() {
         </li>
       </ul>
 
-      {/* Forms */}
       {activeTab === 'login' ? (
-        <form className="border rounded p-4 shadow-sm bg-white">
+        <form className="border rounded p-4 shadow-sm bg-white" onSubmit={handleLogin}>
           <div className="mb-3">
             <label htmlFor="loginEmail" className="form-label">Email address</label>
-            <input type="email" className="form-control" id="loginEmail" placeholder="Enter your email" />
+            <input type="email" className="form-control" id="loginEmail" placeholder="Enter your email" required />
           </div>
           <div className="mb-3">
             <label htmlFor="loginPassword" className="form-label">Password</label>
-            <input type="password" className="form-control" id="loginPassword" placeholder="Enter password" />
+            <input type="password" className="form-control" id="loginPassword" placeholder="Enter password" required />
           </div>
           <button type="submit" className="btn w-100 text-white" style={{ backgroundColor: '#0D40A5' }}>
             Login
           </button>
         </form>
       ) : (
-        <form className="border rounded p-4 shadow-sm bg-white">
+   
+        <form className="border rounded p-4 shadow-sm bg-white" onSubmit={handleSignup}>
           <div className="mb-3">
             <label htmlFor="signupName" className="form-label">Full Name</label>
-            <input type="text" className="form-control" id="signupName" placeholder="Enter your full name" />
+            <input type="text" className="form-control" id="signupName" placeholder="Enter your full name" required />
           </div>
           <div className="mb-3">
             <label htmlFor="signupEmail" className="form-label">Email address</label>
-            <input type="email" className="form-control" id="signupEmail" placeholder="Enter your email" />
+            <input type="email" className="form-control" id="signupEmail" placeholder="Enter your email" required />
           </div>
           <div className="mb-3">
             <label htmlFor="signupPassword" className="form-label">Password</label>
-            <input type="password" className="form-control" id="signupPassword" placeholder="Create a password" />
+            <input type="password" className="form-control" id="signupPassword" placeholder="Create a password" required />
           </div>
           <button type="submit" className="btn w-100 text-white" style={{ backgroundColor: '#0D40A5' }}>
             Sign Up

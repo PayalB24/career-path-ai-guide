@@ -1,30 +1,173 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
+const scaleLabels = [
+  "Strongly Disagree",
+  "Disagree",
+  "Neutral",
+  "Agree",
+  "Strongly Agree"
+];
 
 const RealWorldSimulation = () => {
+  const [questions, setQuestions] = useState([]);
+  const [responses, setResponses] = useState({});
+  const [result, setResult] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:5000/simulation-questions")
+      .then((res) => setQuestions(res.data))
+      .catch((err) => console.error("Error fetching real-world simulation questions", err));
+  }, []);
+
+  const handleChange = (value) => {
+    setResponses({ ...responses, [currentIndex]: value });
+  };
+
+  const handleNext = () => {
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const answers = questions.map((q, idx) => ({
+      category: q.category,
+      value: Number(responses[idx] || 0),
+    }));
+
+    try {
+      const res = await axios.post("http://127.0.0.1:5000/simulation-submit", { answers });
+      setResult(res.data.recommendation);
+
+      // Redirect to result page after 2 seconds
+      setTimeout(() => {
+        navigate("/result");
+      }, 2000);
+    } catch (err) {
+      console.error("Error submitting simulation answers", err);
+    }
+  };
+
   return (
-    <div className="container py-5">
-      <h2 className="text-primary mb-4">Real World Simulation Test</h2>
-      <form>
-        <div className="mb-3">
-          <label className="form-label">You're assigned to build a website with a team, what's your role?</label>
-          <select className="form-select">
-            <option>Write code and develop features</option>
-            <option>Organize tasks and lead communication</option>
-            <option>Create the layout and visuals</option>
-            <option>Test and fix bugs</option>
-          </select>
+    <div className="container mt-5">
+      <h2 className="mb-4 text-center">🌍 Real-World Simulation Assessment</h2>
+
+      <div className="row">
+        {/* Left Panel */}
+        <div className="col-md-7">
+          {questions.length > 0 && (
+            <form onSubmit={handleSubmit}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.3 }}
+                  className="card shadow p-4 mb-4"
+                  style={{ minHeight: "300px", borderRadius: "20px" }}
+                >
+                  <h5 className="mb-3">
+                    Q{currentIndex + 1}: {questions[currentIndex].question}
+                  </h5>
+
+                  {scaleLabels.map((label, value) => (
+                    <div key={value} className="form-check my-2">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name={`q${currentIndex}`}
+                        value={value + 1}
+                        checked={responses[currentIndex] === value + 1}
+                        onChange={() => handleChange(value + 1)}
+                        id={`q${currentIndex}_${value}`}
+                      />
+                      <label
+                        className="form-check-label ms-2"
+                        htmlFor={`q${currentIndex}_${value}`}
+                      >
+                        {label}
+                      </label>
+                    </div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="d-flex justify-content-between">
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={handleBack}
+                  disabled={currentIndex === 0}
+                >
+                  ⬅️ Back
+                </button>
+
+                {currentIndex === questions.length - 1 ? (
+                  <button type="submit" className="btn btn-success">
+                    ✅ Submit
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={handleNext}
+                    disabled={!responses[currentIndex]}
+                  >
+                    Next ➡️
+                  </button>
+                )}
+              </div>
+            </form>
+          )}
+
+          {result && (
+            <div className="alert alert-info mt-4">
+              <h5>🚀 Final Recommendation:</h5>
+              <p className="fw-bold text-success">{result}</p>
+            </div>
+          )}
         </div>
-        <div className="mb-3">
-          <label className="form-label">You’re asked to pitch an idea. What’s your focus?</label>
-          <select className="form-select">
-            <option>Data and analysis</option>
-            <option>Visual presentation</option>
-            <option>Real-world impact</option>
-            <option>Feasibility and execution</option>
-          </select>
+
+        {/* Right Panel: Placeholder for chatbot or info */}
+        <div className="col-md-5">
+          <div
+            className="card shadow p-3"
+            style={{ height: "100%", borderRadius: "20px" }}
+          >
+            <h5 className="mb-4">🧭 CareerBot Assistant</h5>
+            <p>Use the AI assistant to clarify doubts or understand simulations.</p>
+            <div
+              style={{
+                height: "300px",
+                backgroundColor: "#f8f9fa",
+                borderRadius: "10px",
+                padding: "1rem",
+                overflowY: "auto",
+              }}
+            >
+              <p>
+                <em>This space will include your chatbot integration or hints for simulations.</em>
+              </p>
+            </div>
+          </div>
         </div>
-        <button className="btn text-white" style={{ backgroundColor: '#0D40A5' }}>Submit</button>
-      </form>
+      </div>
     </div>
   );
 };
